@@ -1,0 +1,32 @@
+name: React.js Build
+
+# This triggers the action whenever you push code to the main branch
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    # 1. Grabs your code from the repository
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    # 2. Installs Node.js (required for React)
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20' # You can change this if you use an older version
+
+    # 3. Installs your project dependencies (like running npm install on your PC)
+    - name: Install dependencies
+      run: npm install
+
+    # 4. Builds the React app to check for errors
+    - name: Build the app
+      run: npm run build
+      
